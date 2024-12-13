@@ -11,6 +11,7 @@ public class GenerateAst {
             // use System.out.println instead of PrintWriter.println
             PrintWriter writer = new PrintWriter(System.out);
             defineAst(writer, "Expr", Arrays.asList(
+                    "Ternary  : Expr cond, Token condOperator, Expr trueExpr, Token colonOperator, Expr falseExpr",
                     "Binary   : Expr left, Token operator, Expr right",
                     "Grouping : Expr expression",
                     "Literal  : Object value",
@@ -23,13 +24,14 @@ public class GenerateAst {
             PrintWriter writer = new PrintWriter(path, "UTF-8");
 
             defineAst(writer, baseName, Arrays.asList(
+                    "Ternary  : Expr cond, Token condOperator, Expr trueExpr, Token colonOperator, Expr falseExpr",
                     "Binary   : Expr left, Token operator, Expr right",
                     "Grouping : Expr expression",
                     "Literal  : Object value",
                     "Unary    : Token operator, Expr right"
             ));
         } else {
-            System.err.println("Usage: generate_ast [flags] <output directory>");
+            System.err.println("Usage: generate_ast <output directory>");
             System.exit(64);
         }
 

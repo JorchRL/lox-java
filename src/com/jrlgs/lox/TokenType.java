@@ -9,6 +9,8 @@ public enum TokenType {
     GREATER, GREATER_EQUAL,
     LESS, LESS_EQUAL,
 
+    QUESTION, COLON,
+
     // literals
     IDENTIFIER, STRING, NUMBER,
 

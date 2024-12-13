@@ -64,6 +64,8 @@ public class Scanner {
             case '+' : addToken(PLUS); break;
             case ';' : addToken(SEMICOLON); break;
             case '*' : addToken(STAR); break;
+            case '?' : addToken(QUESTION); break;
+            case ':' : addToken(COLON); break;
             // 2-character lexemes (i.e boolean operators)
             case '!' : addToken(match('=') ? BANG_EQUAL : BANG); break;
             case '=' : addToken(match('=') ? EQUAL_EQUAL : EQUAL); break;
@@ -96,7 +98,7 @@ public class Scanner {
                    identifier();
                 }
                 else {
-                    Lox.error(line, "Unexpected character");
+                    Lox.error(line, "Unexpected character: " + "'" + c + "'");
                 }
                 break;
         }
@@ -201,8 +203,8 @@ public class Scanner {
     }
 
     private void addToken(TokenType type, Object literal) {
-        String text = source.substring(start, current);
-        tokens.add(new Token(type, text, literal, line));
+        String lexemeText = source.substring(start, current);
+        tokens.add(new Token(type, lexemeText, literal, line));
     }
 
 

@@ -29,6 +29,14 @@ public class AstPrinter implements Expr.Visitor<String> {
     // access its methods and (maybe) data....
 
     @Override
+    public String visitTernaryExpr(Expr.Ternary ternary) {
+        // (? cond (: expr1 expr2) )
+        Expr.Binary nested = new Expr.Binary(ternary.cond, ternary.condOperator,
+                new Expr.Binary(ternary.trueExpr, ternary.colonOperator, ternary.falseExpr));
+        return parenthesize(nested.operator.lexeme, nested.left, nested.right);
+    }
+
+    @Override
     public String visitBinaryExpr(Expr.Binary binary) {
         return parenthesize(binary.operator.lexeme, binary.left, binary.right);
     }
